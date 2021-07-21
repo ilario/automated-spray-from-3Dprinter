@@ -3,20 +3,22 @@ const int outputPin = 13;
 const int directionPin = 12;
 const int thresholdUp = 100;
 const int thresholdDown = 30;
-const int maxTimeToOff = 600;
+const int maxTimeToOff = 650;
 const int sleepDuration = 50;
-const boolean invertedFlowBefore = true;
+const boolean invertedFlowBefore = false;
 const int invertedFlowBeforeDuration = 100; 
-const boolean invertedFlowAfter = true;
+const boolean invertedFlowAfter = false;
 const int invertedFlowAfterDuration = 2000; 
 
-int timeToOff = 0;
+int inputStatus = 0;
 int statusOnOff = 0;
 int statusOnOffPrevious = 0;
+int timeToOff = 0;
+int inputStatusPrevious = -1;
 
 void setup() {
-  // initialize serial communication at 9600 bits per second:
-  Serial.begin(38400);
+  // initialize serial communication at 2*9600 bits per second:
+  Serial.begin(19200);
   // initialize digital pin enablePort as an output.
   pinMode(outputPin, OUTPUT);
   digitalWrite(outputPin, LOW);
@@ -27,11 +29,19 @@ void setup() {
 void loop() {
   int inputValue = analogRead(inputPin);
   if (inputValue > thresholdUp) {
-    timeToOff = maxTimeToOff;
+    inputStatus = 1;
   }
   if (inputValue < thresholdDown) {
-    timeToOff = max(timeToOff - sleepDuration, 0);
+    inputStatus = 0;
   }
+  // check if inputStatus changed
+  if (inputStatusPrevious == -1 || inputStatus == inputStatusPrevious) {
+    timeToOff = max(timeToOff - sleepDuration, 0);
+  } else {
+    timeToOff = maxTimeToOff;
+  }
+  // store inputStatus value
+  inputStatusPrevious = inputStatus;
   Serial.print("Input = ");
   Serial.print(inputValue);
   Serial.print(";\ttimeToOff =");
