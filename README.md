@@ -12,7 +12,7 @@ This repository contains some code and some hardware description for easing the 
 The whole nozzle block has been removed and its connections unplugged from the motherboard.
 
 In order to convince the printer that is ok to move the extruder motor (needed for enabling/disabling the pump, see below), it has to be tricked to think that the nozzle is hot.
-This can be achieved connecting a XXX Ohm resistor in place of the nozzle thermocouple, which results in the system read a false temperature aroud 170 C.
+This can be achieved connecting a 1 kΩ resistor in place of the nozzle thermocouple, which results in the system read a false temperature aroud 173 °C.
 
 ### Extruder stepper motor
 
