@@ -1,7 +1,9 @@
-// rev 20210730
+// rev 20210831
 const int inputPin = A0;
-const int outputPin = 13;
+// a digital pin should be enough for the enable/disable connection but for some reason it does not work so an analog one is used
+const int outputPin = 11;
 const int PWMoutputPin = 6; // pin 5 and 6 has a PWM output of 980 Hz on Arduino Uno, double than the other PWM pins
+// this is the flow of the pump, from 0 to 255
 const int PWMoutputValue = 50; // 0-255
 const int directionInputPin = 8;
 const int directionOutputPin = 12;
@@ -11,7 +13,7 @@ const int maxTimeToOff = 650;
 const int sleepDuration = 100;
 const boolean invertedFlowBefore = false;
 const int invertedFlowBeforeDuration = 100; 
-const boolean invertedFlowAfter = false;
+const boolean invertedFlowAfter = true;
 const int invertedFlowAfterDuration = 2000;
 // how many voltage changes should be observed before starting the spray
 const int observedTransientsMinimum = 2;
@@ -28,7 +30,7 @@ void setup() {
   Serial.begin(19200);
   // initialize digital pin enablePort as an output.
   pinMode(outputPin, OUTPUT);
-  digitalWrite(outputPin, LOW);
+  disable(); delay(1000);
   pinMode(directionOutputPin, OUTPUT);
   pinMode(directionInputPin, INPUT);
   analogWrite(PWMoutputPin, PWMoutputValue);
@@ -62,70 +64,80 @@ void loop() {
     statusOnOff = 0;
     Serial.print(";\tOFF");
     // apply OFF status
-    digitalWrite(outputPin, LOW); delay(2);
+    disable();
+    //analogWrite(outputPin,0); delay(2);
   } else {
     statusOnOff = 1;
     Serial.print(";\tON");
     // apply ON status
-    digitalWrite(outputPin, HIGH); delay(2);
+    enable();
+    //analogWrite(outputPin,255); delay(2);
   }
-  // pull back shortly for stirring the solution before spraying
   if (statusOnOff > statusOnOffPrevious) {
     Serial.print(";\t GOING ON");
+    // pull back shortly for stirring the solution before spraying
     if (invertedFlowBefore) {
       Serial.print(";\tBACK FLOW");
-      digitalWrite(outputPin, LOW); delay(2);
+      disable();
       digitalWrite(directionOutputPin, LOW);
       // maybe is good to have some time off at direction changes
       delay(20);
-      digitalWrite(outputPin, HIGH);
+      enable();
       delay(invertedFlowBeforeDuration);
       // reestablish the normal pump direction
-      digitalWrite(outputPin, LOW); delay(2);
+      disable();
       digitalWrite(directionOutputPin, HIGH);
       // maybe is good to have some time off at direction changes
       delay(20);
-      digitalWrite(outputPin, HIGH); delay(2);
+      enable();
     }
   }
 
-  // pull back shortly for avoiding a thin tail of spray
   if (statusOnOff < statusOnOffPrevious) {
     Serial.print(";\tGOING OFF");
     // reset the counter
     observedTransients = 0;
+    // pull back shortly for avoiding a thin tail of spray
     if (invertedFlowAfter) {
       Serial.print(";\tBACK FLOW");
-      digitalWrite(outputPin, LOW); delay(2);
+      disable();
       digitalWrite(directionOutputPin, LOW);
       // maybe is good to have some time off at direction changes
       delay(20);
-      digitalWrite(outputPin, HIGH);
+      enable();
       delay(invertedFlowAfterDuration);
-      digitalWrite(outputPin, LOW); delay(2);
+      disable();
       digitalWrite(directionOutputPin, HIGH); delay(2);
     }
   }
   // store status
   statusOnOffPrevious = statusOnOff;
-  directionInputStatus = digitalRead(directionInputPin);
-  if (directionInputStatus == HIGH) {
+  if (digitalRead(directionInputPin) == HIGH) {
     Serial.print(";\tBACK FLOW");
     // button is pressed, pulses of inverted flow direction
-    digitalWrite(outputPin, LOW); delay(2);
+    disable();
     digitalWrite(directionOutputPin, LOW);
     // maybe is good to have some time off at direction changes
     delay(20);
-    digitalWrite(outputPin, HIGH);
-    delay(100);
-    digitalWrite(outputPin, LOW);
+    analogWrite(PWMoutputPin, 150);
+    enable();
+    delay(1000);
+    analogWrite(PWMoutputPin, PWMoutputValue);
+    disable();
     // maybe is good to have some time off at direction changes
     delay(20);
   } else {
     // button is not pressed, normal flow direction
     digitalWrite(directionOutputPin, HIGH); delay(2);
-    digitalWrite(outputPin, HIGH); delay(2);
     delay(sleepDuration);
   }
   Serial.println();
+}
+
+void enable(){
+  analogWrite(outputPin, 255); delay(2);
+}
+
+void disable(){
+  analogWrite(outputPin, 0); delay(2);
 }
