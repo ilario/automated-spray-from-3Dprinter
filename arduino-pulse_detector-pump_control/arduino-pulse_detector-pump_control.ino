@@ -1,10 +1,9 @@
-// rev 20210831
+// rev 20210902
 const int inputPin = A0;
-// a digital pin should be enough for the enable/disable connection but for some reason it does not work so an analog one is used
-const int outputPin = 11;
+const int outputPin = 13;
 const int PWMoutputPin = 6; // pin 5 and 6 has a PWM output of 980 Hz on Arduino Uno, double than the other PWM pins
 // this is the flow of the pump, from 0 to 255
-const int PWMoutputValue = 50; // 0-255
+const int PWMoutputValue = 25; // 0-255
 const int directionInputPin = 8;
 const int directionOutputPin = 12;
 const int inputThresholdHigh = 100;
@@ -14,7 +13,7 @@ const int sleepDuration = 100;
 const boolean invertedFlowBefore = false;
 const int invertedFlowBeforeDuration = 100; 
 const boolean invertedFlowAfter = true;
-const int invertedFlowAfterDuration = 2000;
+const int invertedFlowAfterDuration = 200;
 // how many voltage changes should be observed before starting the spray
 const int observedTransientsMinimum = 2;
 
@@ -135,9 +134,13 @@ void loop() {
 }
 
 void enable(){
-  analogWrite(outputPin, 255); delay(2);
+  //analogWrite(outputPin, 255);
+  digitalWrite(outputPin, HIGH);
+  delay(2);
 }
 
 void disable(){
-  analogWrite(outputPin, 0); delay(2);
+  //analogWrite(outputPin, 0);
+  digitalWrite(outputPin, LOW);
+  delay(2);
 }
