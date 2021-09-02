@@ -13,25 +13,29 @@ This repository contains some code and some hardware description for easing the 
 
 The whole nozzle block has been removed and its connections unplugged from the motherboard.
 
-In order to convince the printer that is ok to move the extruder motor (needed for enabling/disabling the pump, see below), it has to be tricked to think that the nozzle is hot.
-This can be achieved connecting a 1 kΩ resistor in place of the nozzle thermocouple, which results in the system read a false temperature aroud 173 °C.
+The extruder temperature check can be disabled when printing (using G-Code [M302](https://marlinfw.org/docs/gcode/M302.html)). If this check is in place the printer will refuse to move the extruder unless an extruder temperature greater than 170 °C is detected.
+
+For development purposes it is possible to trick the printer to measure a false extruder temperature, bypassing the mentioned check even when not printing (i.e. when moving the printer through its own physical interface). This can be achieved connecting a 1 kΩ resistor in place of the nozzle thermocouple, which results in the system read a false temperature aroud 173 °C.
 
 ### Extruder stepper motor
 
 The extruder motor has also been removed.
-An external circuit, described below, has been connected to the connector of the cable going from the motherboard to the removed extruder motor.
 
-### Pump
-
-An XXX pump has been attached to the frame of the printer. The pump is controlled by a small motherboard, which allows us to control the flow using a 0-5 V input which we can provide using an Arduino.
+A custom external circuit, described below, has been connected to the connector of the cable going from the motherboard to the removed extruder motor.
 
 ### Spray nozzle
 
-A XXX nozzle has been selected for outputting a fine mist spray and connected to the pump. It has been installed in place of the extruder nozzle.
+A XXX nozzle has been selected for outputting a fine mist spray. It has been installed in place of the extruder nozzle.
+
+### Pump
+
+A MGD1000P from TCS MicroPumps pump has been attached to the nozzle support. The pump is controlled by a small motherboard, which allows us to control the flow using a 0-5 V input which we can provide using an Arduino Uno (with some interface electronics, see below).
 
 ### Circuit interface for Arduino output
 
-The Arduino can output 5 V. Can provide variations in form of a pulse modulated width (PWM) that seems not reliable with our pump. So, in order to output voltages in the 0-5 V we connected a potentiometer to an Arduino output and to one of its ground connections.
+The Arduino Uno can output 0 V or 5 V but does not have a DAC (Digital-to-Analog Converter) so that it cannot output voltages between 0 and 5 V.
+Other Arduino models can have a real analog output (they have a DAC) but they reach a maximum of 3.3 V.
+The [analogWrite function](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/) on Arduino Uno works outputting a [Pulse Width Modulation](https://www.arduino.cc/en/Tutorial/Foundations/PWM) wave (PWM) quickly alternating 5 and 0 V for different durations. This results in an erratic flow with our pump. So, in order to output voltages in the 0-5 V range a potentiometer can be used for manual regulation or a [low-pass RC filter](https://en.wikipedia.org/wiki/Low-pass_filter#RC_filter) can be employed for flattening the PWM signal. We chose the latter option as it allows to set the flow from the Arduino code ensuring its reproducibility.
 
 ### Circuit interface for Arduino input
 
@@ -40,7 +44,7 @@ For convenience, we'll have the extruder motor connection cable communicating to
 The extruder stepper motor receives pulses of +24 V, 0 V and -24 V. Arduino analog input can read 0-5 V. For converting the voltages into the acceptable range we used the following electrical scheme:
 
 
-the result is a clean signal pulsing at 0 V for 0.45 s and at approx 1 V for 0.15 s.
+the result is a clean signal at 0 V for 0.45 s and at approx 1 V for 0.15 s.
 
 ## Software
 
