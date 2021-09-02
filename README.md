@@ -5,6 +5,8 @@ A *Creality3D Ender-3 Pro* 3D printer has been converted in order to spray small
 
 This repository contains some code and some hardware description for easing the modification.
 
+[Here (3 min, 300 MB)](https://uz.sns.it/~ilario/VID_20210902_151558.mp4) you can find a video of the first prototype working.
+
 ## Hardware modifications
 
 ### Extruder nozzle
