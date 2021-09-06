@@ -1,11 +1,18 @@
 # automated-spray-from-3Dprinter
- The code used for converting a 3D printer into an automated small area spraying device
+A *Creality3D Ender-3 Pro* 3D printer has been converted in order to spray mid-area surfaces (approx. up to 15x15 cm) with a focus on the coverage homogeneity and the possibility to spray fine-grained suspensions additionally to solutions.
 
-A *Creality3D Ender-3 Pro* 3D printer has been converted in order to spray small area surfaces.
-
-This repository contains some code and some hardware description for easing the modification.
+This repository contains some code and some hardware description for allowing the reproduction.
 
 [Here (3 min, 300 MB)](https://uz.sns.it/~ilario/VID_20210902_151558.mp4) you can find a video of the first prototype working.
+
+## Comparison with other automated spray coaters
+
+We found various benchtop automated spray coaters commercially available, for example from [MinderHightech](https://minder-hightech.en.made-in-china.com/product/MFWTIpzZrRVC/China-Small-Size-Hardware-Electronic-Plastic-Toy-Automatic-Spray-Painting-Machine.html), [IDS](https://www.idsnm.com/products/) or [Nadetech](https://nadetech.com/products/spray-coating).
+
+The most important differences are:
+
+* the focus of our system is on the homogeneity of the coverage, with the possibility to have very low loadings;
+* our system is being designed for spraying also suspensions of fine-grained solid powders.
 
 ## Hardware modifications
 
@@ -25,7 +32,7 @@ A custom external circuit, described below, has been connected to the connector 
 
 ### Spray nozzle
 
-A XXX nozzle has been selected for outputting a fine mist spray. It has been installed in place of the extruder nozzle.
+A XXX nozzle from Bete Ltd. has been selected for outputting a fine mist spray. It has been installed in place of the extruder nozzle.
 
 ### Pump
 
