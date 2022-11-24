@@ -53,6 +53,12 @@ The extruder stepper motor receives pulses of +24 V, 0 V and -24 V. Arduino anal
 
 the result is a clean signal at 0 V for 0.45 s and at approx 1 V for 0.15 s.
 
+Both the input and the output circuits are implemented on the same breadboard.
+
+![breadboard with electronics](IMG_20211112_115941.jpg)
+
+![printer with breadboard and Arduino Uno](IMG_20211112_115950.jpg)
+
 ## Software
 
 In order to get a constant ON state and a quick switch to the OFF state for the pump, the pulsed extruder stepper motor signal can be processed using an Arduino rather than an analogic circuit.
