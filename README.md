@@ -5,6 +5,8 @@ This repository contains some code and some hardware description for allowing th
 
 [Here (3 min, 300 MB)](https://uz.sns.it/~ilario/VID_20210902_151558.mp4) you can find a video of the first prototype working.
 
+![printer and vacuum hold down bed](20221124_123430.jpg)
+
 ## Comparison with other automated spray coaters
 
 We found various benchtop automated spray coaters commercially available, for example from [MinderHightech](https://minder-hightech.en.made-in-china.com/product/MFWTIpzZrRVC/China-Small-Size-Hardware-Electronic-Plastic-Toy-Automatic-Spray-Painting-Machine.html), [IDS](https://www.idsnm.com/products/) or [Nadetech](https://nadetech.com/products/spray-coating).
@@ -13,6 +15,12 @@ The most important differences are:
 
 * the focus of our system is on the homogeneity of the coverage, with the possibility to have very low loadings;
 * our system is being designed for spraying also suspensions of fine-grained solid powders.
+
+## Additions
+
+Independently of the hardware of the printer, we added an ultrasonicator for trying to keep the suspensions suspended in the reservoir. This could be replaced by a magnetic stirrer in the future.
+
+Also, we fabricated a vacuum hold down plate in aluminum. Being metallic, it can pass the heating from the underlying plate of the printer to the sample. The vacuum will help to hold the substrate in touch with the hot plate and also will help the drying removing the solvent crossing the substrate. Depending on the vacuum pump employed, a solvent trap could be needed for avoiding damaging the pump.
 
 ## Hardware modifications
 
