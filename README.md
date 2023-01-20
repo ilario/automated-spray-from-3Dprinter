@@ -1,11 +1,15 @@
 # automated-spray-from-3Dprinter
-A *Creality3D Ender-3 Pro* 3D printer has been converted in order to spray mid-area surfaces (approx. up to 15x15 cm) with a focus on the coverage homogeneity and the possibility to spray fine-grained suspensions additionally to solutions.
+A *Creality3D Ender-3 Pro* 3D printer has been converted in order to spray **mid-area surfaces** (approx. up to 15x15 cm) with a focus on the coverage homogeneity and the possibility to spray fine-grained suspensions additionally to solutions.
 
-This repository contains some code and some hardware description for allowing the reproduction.
+This repository contains some code (GCODE for moving the printing head and Arduino code) and some hardware description for allowing the reproduction.
+
+Our modifications included: the replacement of the extruder with a **nozzle** (BETE Ltd., full cone with an opening of 90° creating a fine mist); the replacement of the stepped motor feeder with a **pump** (TCS MicroPumps, model MGD1000P); the addition of a **custom aluminum vacuum hold down bed**; the addition of a commercial **ultrasonication system** for keeping the ink well suspended; the connection of a **resistor to the connection port originally in place for the thermocouple of the removed extruder**; the addition of an **Arduino Uno** board programmed for starting the spray when the 3D printer tries to start removed stepped motor; the **custom electronics** for interfacing the Arduino with the stepped motor controller and with the pump speed controller.
 
 [Here (3 min, 300 MB)](https://uz.sns.it/~ilario/VID_20210902_151558.mp4) you can find a video of the first prototype working.
 
-![printer and vacuum hold down bed](20221124_123430.jpg)
+![printer and vacuum hold down bed](20221124_123430-annotated.jpg)
+
+In the above printer, the visible modifications are: **1** commercial pump; **2** commercial nozzle; **3** custom made vacuum hold down bed; **4** commercial ultrasonicating system; **5** Arduino Uno board; **6** custom electronics.
 
 ## Comparison with other automated spray coaters
 
@@ -40,7 +44,7 @@ A custom external circuit, described below, has been connected to the connector 
 
 ### Spray nozzle
 
-A XXX nozzle from Bete Ltd. has been selected for outputting a fine mist spray. It has been installed in place of the extruder nozzle.
+A XXX full cone with 90° opening nozzle from Bete Ltd. has been selected for outputting a fine mist spray. It has been installed in place of the extruder nozzle.
 
 ### Pump
 
@@ -65,7 +69,7 @@ Both the input and the output circuits are implemented on the same breadboard.
 
 ![breadboard with electronics](IMG_20211112_115941.jpg)
 
-![printer with breadboard and Arduino Uno](IMG_20211112_115950.jpg)
+![printer with breadboard and Arduino Uno](IMG_20211112_115950-annotated.jpg)
 
 ## Software
 
