@@ -44,7 +44,7 @@ A custom external circuit, described below, has been connected to the connector 
 
 ### Spray nozzle
 
-A XXX full cone with 90° opening nozzle from Bete Ltd. has been selected for outputting a fine mist spray. It has been installed in place of the extruder nozzle.
+A [BETE Ltd. HA-0.10 hollow cone nozzle](https://www.bete-europe.com/en/products/hollow-cone-nozzles/ha-hollow-cone-nozzle.html) with an orifice of 0.1 mm of diameter and emitting a cone of 90° has been selected for outputting a fine mist spray. It has been installed in place of the extruder nozzle.
 
 ### Pump
 
