@@ -56,7 +56,7 @@ The Arduino Uno can output 0 V or 5 V but does not have a DAC (Digital-to-Analog
 Other Arduino models can have a real analog output (they have a DAC) but they reach a maximum of 3.3 V.
 The [analogWrite function](https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/) on Arduino Uno works outputting a [Pulse Width Modulation](https://www.arduino.cc/en/Tutorial/Foundations/PWM) wave (PWM) quickly alternating 5 and 0 V for different durations. This results in an erratic flow with our pump. So, in order to output voltages in the 0-5 V range a potentiometer can be used for manual regulation or a [low-pass RC filter](https://en.wikipedia.org/wiki/Low-pass_filter#RC_filter) can be employed for flattening the PWM signal. We chose the latter option as it allows to set the flow from the Arduino code ensuring its reproducibility.
 
-![electronics from arduino to pump](electronics-from_arduino_to_pump.png)
+![electronics from arduino to pump](electronics/electronics-from_arduino_to_pump.png)
 
 ### Circuit interface from printer's stepper motor connector to Arduino input
 
@@ -64,7 +64,7 @@ For convenience, we'll have the extruder motor connection cable communicating to
 
 The extruder stepper motor receives pulses of +24 V, 0 V and -24 V. Arduino analog input can read 0-5 V. For converting the voltages into the acceptable range we used the following electrical scheme:
 
-![electronics from printer to arduino](electronics-from_printer_to_arduino.png)
+![electronics from printer to arduino](electronics/electronics-from_printer_to_arduino.png)
 
 the result is a clean signal at 0 V for 0.45 s and at approx 1 V for 0.15 s.
 
@@ -73,7 +73,7 @@ the result is a clean signal at 0 V for 0.45 s and at approx 1 V for 0.15 s.
 
 For the convenience of cleaning the nozzle with an inverted flow (sucking clean solvent dipping the nozzle in it) we added a button for inverting the flow of the pump. The electrical connection to the Arduino is represented in the following scheme:
 
-![electronics invert switch](electronics-invert_switch.png)
+![electronics invert switch](electronics/electronics-invert_switch.png)
 
 All the three mentioned circuits are implemented on the same breadboard, as can be seen in the pictures.
 
