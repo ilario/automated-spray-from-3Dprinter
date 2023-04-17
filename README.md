@@ -5,7 +5,7 @@ This repository contains some code (GCODE for moving the printing head and Ardui
 
 Our modifications included: the replacement of the extruder with a **nozzle** (BETE Ltd., full cone with an opening of 90° creating a fine mist); the replacement of the stepped motor feeder with a **pump** (TCS MicroPumps, model MGD1000P); the addition of a **custom aluminum vacuum hold down bed**; the addition of a commercial **ultrasonication system** for keeping the ink well suspended; the connection of a **resistor to the connection port originally in place for the thermocouple of the removed extruder**; the addition of an **Arduino Uno** board programmed for starting the spray when the 3D printer tries to start removed stepped motor; the **custom electronics** for interfacing the Arduino with the stepped motor controller and with the pump speed controller.
 
-[Here (3 min, 300 MB)](https://uz.sns.it/~ilario/VID_20210902_151558.mp4) you can find a video of the first prototype working.
+[Here (3 min, 300 MB)](https://uz.sns.it/~ilario/VID_20210902_151558.mp4) you can find a **VIDEO of the FIRST PROTOTYPE** working.
 
 ![printer and vacuum hold down bed](20221124_123430-annotated.jpg)
 
